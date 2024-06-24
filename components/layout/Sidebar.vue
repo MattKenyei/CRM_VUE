@@ -1,5 +1,4 @@
 <script lang="ts" setup></script>
-<!-- //TODO: appwrite + auth  -->
 <template>
   <aside class="px-5 py-8 bg-sidebar h-full relative w-full">
     <NuxtLink to="/" class="mb-10 block">
