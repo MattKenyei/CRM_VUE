@@ -3,6 +3,7 @@ import { useMutation } from "@tanstack/vue-query";
 import dayjs from "dayjs";
 import { COLLECTION_DEALS, DB_ID } from "~/app.constants";
 import type { EnumStatus } from "~/components/kanban/deals.types";
+import { generateColumnStyle } from "~/components/kanban/generate-gradient";
 import type { ICard, IColumn } from "~/components/kanban/kanban.types";
 import { UseKanbanQuery } from "~/components/kanban/usekanbanQuery";
 
@@ -40,8 +41,8 @@ function handleDragOver(event: DragEvent) {
 }
 
 function handleDrop(targetColumn: IColumn) {
-  if (dragCardRef.value && sourceCoulumnRef.value){
-    mutate({docId: dragCardRef.value.id, status: targetColumn.id})
+  if (dragCardRef.value && sourceCoulumnRef.value) {
+    mutate({ docId: dragCardRef.value.id, status: targetColumn.id });
   }
 }
 </script>
@@ -51,8 +52,17 @@ function handleDrop(targetColumn: IColumn) {
     <div v-if="isLoading">Loading...</div>
     <div v-else>
       <div class="grid grid-cols-5 gap-16">
-        <div v-for="(column, index) in data" :key="column.id" @dragover="handleDragOver" @drop="() => handleDrop(column)">
-          <div class="rounded bg-slate-700 py-1 px-5 mb-2 text-center">
+        <div
+          v-for="(column, index) in data"
+          :key="column.id"
+          @dragover="handleDragOver"
+          @drop="() => handleDrop(column)"
+          class="min-h-screen"
+        >
+          <div
+            class="rounded bg-slate-700 py-1 px-5 mb-2 text-center"
+            :style="generateColumnStyle(index, data?.length)"
+          >
             {{ column.name }}
           </div>
           <div>
