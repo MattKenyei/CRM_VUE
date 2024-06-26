@@ -16,8 +16,10 @@ export default defineNuxtConfig({
         },
       },
     ],
-    'nuxt-icon',
-    '@pinia/nuxt',
+    "nuxt-icon",
+    "@pinia/nuxt",
+
+    "@vee-validate/nuxt",
   ],
 
   shadcn: {
@@ -25,6 +27,6 @@ export default defineNuxtConfig({
     componentDir: "./components/ui",
   },
   pinia: {
-    storesDirs: ['./store/**']
-  }
+    storesDirs: ["./store/**"],
+  },
 });
