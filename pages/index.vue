@@ -14,6 +14,7 @@ useHead({
 const dragCardRef = ref<ICard | null>(null);
 const sourceCoulumnRef = ref<IColumn | null>(null);
 const { data, isLoading, refetch } = UseKanbanQuery();
+const store  = useDealSlideStore()
 
 type TypeMutationVarables = {
   docId: string;
@@ -74,7 +75,7 @@ function handleDrop(targetColumn: IColumn) {
               draggable="true"
               @dragstart="() => handleDragStart(card, column)"
             >
-              <UiCardHeader role="button">
+              <UiCardHeader role="button" @click="store.set(card)">
                 <UiCardTitle>{{ card.name }}</UiCardTitle>
                 <UiCardDescription class="mt-2 block">
                   {{ convertCurrency(card.price) }}
@@ -89,6 +90,7 @@ function handleDrop(targetColumn: IColumn) {
           </div>
         </div>
       </div>
+      <KanbanSlideover />
     </div>
   </div>
 </template>
